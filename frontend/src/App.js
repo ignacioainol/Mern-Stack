@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
 import Navigation from './components/Navigation';
@@ -8,11 +9,10 @@ import CreateUser from './components/CreateUser';
 
 function App() {
   return (
-   <div>
-     <Navigation/>
-     <NotesList/>
-     Hello world
-     </div>
+  <Router>
+    <Navigation/>
+    <Route path="/" component={NotesList}/>
+  </Router>
   );
 }
 
