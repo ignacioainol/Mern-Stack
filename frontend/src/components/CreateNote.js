@@ -19,7 +19,6 @@ export default class CreateNote extends Component {
             users: res.data.map(user => user.username),
             userSelected: res.data[0].username
         });
-        console.log(this.state.users);
     }
 
     onSubmit = async (e) => {
@@ -30,7 +29,7 @@ export default class CreateNote extends Component {
             author: this.state.userSelected,
             date: this.state.date
         });
-        alert("Ok :D");
+        window.location.href = '/';
         //alert(this.state.title + " " + this.state.content + " " + this.state.userSelected + " "+ this.state.date);
         
     }
