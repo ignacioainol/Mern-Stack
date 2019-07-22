@@ -33,11 +33,6 @@ export default class CreateUser extends Component {
         this.getUsers();
     }
 
-    // deleteUser = async  (userId) => {
-    //     await axios.delete('http://localhost:4000/api/users/'+ userId);
-    //     this.getUsers();
-    // }
-
     deleteUser = async (userId,username) => {
         const response = window.confirm(`are you sure you want to delete ${username} ? `);
         if (response) {
