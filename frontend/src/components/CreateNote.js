@@ -8,6 +8,8 @@ export default class CreateNote extends Component {
     state = {
         users: [],
         userSelected: '',
+        title: '',
+        content: '',
         date: new Date()
     }
 
@@ -26,8 +28,14 @@ export default class CreateNote extends Component {
 
     onInputChange = (e) => {
         this.setState({
-            userSelected: e.target.value
+            [e.target.name]: e.target.value
         });
+    }
+
+    onChangeDate = (date) => {
+        this.setState({
+            date
+        })
     }
 
     render() {
@@ -53,17 +61,26 @@ export default class CreateNote extends Component {
                         </div>
 
                         <div className="form-group">
-                            <input type="text" name="title" required className="form-control" placeholder="Title" />
+                            <input type="text"
+                                   name="title" required 
+                                   className="form-control"
+                                   onChange={this.onInputChange}
+                                   placeholder="Title" />
                         </div>
 
                         <div className="form-group">
-                            <textarea name="description" cols="2" className="form-control" placeholder="Description"></textarea>
+                            <textarea name="description" 
+                                      cols="2" 
+                                      className="form-control" 
+                                      onChange={this.onInputChange}
+                                      placeholder="Description"></textarea>
                         </div>
 
                         <div className="form-group">
                             <DatePicker 
                                 className="form-control"
                                 selected={this.state.date}
+                                onChange={this.onChangeDate}
                                 />
                         </div>
 
