@@ -26,13 +26,24 @@ export default class CreateUser extends Component {
 
     onSubmit = async (e) => {
         e.preventDefault();
-        const res = await axios.post('http://localhost:4000/api/users',{
+        await axios.post('http://localhost:4000/api/users',{
             username: this.state.username
         });
         this.setState({username:''});
         this.getUsers();
+    }
 
-        console.log(res);
+    // deleteUser = async  (userId) => {
+    //     await axios.delete('http://localhost:4000/api/users/'+ userId);
+    //     this.getUsers();
+    // }
+
+    deleteUser = async (userId,username) => {
+        const response = window.confirm('are you sure you want to delete it? ' + username + " " + userId);
+        if (response) {
+            await axios.delete('http://localhost:4000/api/users/' + userId);
+            this.getUsers();
+        }
     }
 
     render() {
@@ -60,9 +71,10 @@ export default class CreateUser extends Component {
                     <ul className="list-group">
                         {
                             this.state.users.map(user => (
-                                <li className="list-group-item list-group-action" key={user._id}>
+                                <li className="list-group-item list-group-item-action" key={user._id} onDoubleClick={() => this.deleteUser(user._id,user.username)}>
                                     {user.username}
-                                </li>))
+                                </li>
+                               ))
                         }
                     </ul>
                 </div>
