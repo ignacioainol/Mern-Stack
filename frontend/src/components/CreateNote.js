@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default class CreateNote extends Component {
 
     state = {
-        users: []
+        users: [],
+        userSelected: '',
+        date: new Date()
     }
 
     async componentDidMount() {
@@ -20,14 +24,36 @@ export default class CreateNote extends Component {
         
     }
 
+    onInputChange = (e) => {
+        this.setState({
+            userSelected: e.target.value
+        });
+    }
+
     render() {
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card card-body">
                     <h4>Create Note</h4>
                     <form onSubmit={this.onSubmit}>
+
                         <div className="form-group">
-                            <input type="text" name="title" className="form-control" placeholder="Title" />
+                            <select 
+                                className="form-control" 
+                                name="userSelected"
+                                onChange={this.onInputChange}
+                                >
+                                    {
+                                        this.state.users.map(user => 
+                                        <option key={user} value={user}>
+                                            {user}
+                                        </option>)
+                                    }
+                            </select>
+                        </div>
+
+                        <div className="form-group">
+                            <input type="text" name="title" required className="form-control" placeholder="Title" />
                         </div>
 
                         <div className="form-group">
@@ -35,17 +61,10 @@ export default class CreateNote extends Component {
                         </div>
 
                         <div className="form-group">
-                            <select 
-                                className="form-control" 
-                                name="userSelected"
-                                >
-                                    {
-                                        this.state.users.map(user => 
-                                        <option key={user}>
-                                            {user}
-                                        </option>)
-                                    }
-                            </select>
+                            <DatePicker 
+                                className="form-control"
+                                selected={this.state.date}
+                                />
                         </div>
 
                         <button className="btn btn-primary btn-block">Save Note</button>
