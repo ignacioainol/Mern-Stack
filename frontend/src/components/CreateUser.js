@@ -9,13 +9,30 @@ export default class CreateUser extends Component {
     }
 
     async componentDidMount(){
-        const res = await axios.get('http://localhost:4000/api/users');
-        this.setState({users:res.data});
+        this.getUsers();
         console.log(this.state.users);
     }
 
+    getUsers = async e => {
+        const res = await axios.get('http://localhost:4000/api/users');
+        this.setState({users:res.data});
+    }
+
     onChangeUserName = (e) => {
-        console.log(e.target.value);
+        this.setState({
+            username: e.target.value
+        });
+    }
+
+    onSubmit = async (e) => {
+        e.preventDefault();
+        const res = await axios.post('http://localhost:4000/api/users',{
+            username: this.state.username
+        });
+        this.setState({username:''});
+        this.getUsers();
+
+        console.log(res);
     }
 
     render() {
@@ -23,12 +40,19 @@ export default class CreateUser extends Component {
             <div className="row">
                 <div className="col-md-4">
                     <h3>Create New User</h3>
-                    <form>
+                    <form onSubmit={this.onSubmit}>
                         <div className="form-group">
-                            <input 
+                            <input
+                                value={this.state.username}
                                 type="text" 
                                 className="form-control" 
                                 onChange={this.onChangeUserName}/>
+                        </div>
+
+                        <div className="form-group">
+                            <button type="submit" className="btn btn-primary">
+                                Save
+                            </button>
                         </div>
                     </form>
                 </div>
