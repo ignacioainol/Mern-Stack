@@ -15,15 +15,17 @@ export default class NotesList extends Component {
     }
 
     componentDidMount = async () => {
-        const res = await axios.get('http://localhost:4000/api/notes');
-        this.setState({
-            notes: res.data
-        });
-        console.log(res.data);
+        this.getNotes();
     }
 
-    deleteNote(id){
-        console.log(id);
+    getNotes = async e => {
+        const res = await axios.get('http://localhost:4000/api/notes');
+        this.setState({notes:res.data});
+    }
+
+    deleteNote = async (id) => {
+        await axios.delete(`http://localhost:4000/api/notes/${id}`);
+        this.getNotes();
     }
 
     render() {
