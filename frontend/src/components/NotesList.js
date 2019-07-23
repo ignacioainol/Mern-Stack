@@ -21,6 +21,11 @@ export default class NotesList extends Component {
         });
         console.log(res.data);
     }
+
+    deleteNote(id){
+        console.log(id);
+    }
+
     render() {
         return (
             <div className="row">
@@ -34,7 +39,7 @@ export default class NotesList extends Component {
                                             <h4>{note.title}</h4>
                                         </div>
                                         <div className="col-md-2">
-                                            <FaTimesCircle className="deleteNote" />
+                                            <FaTimesCircle className="deleteNote" onClick={ () => this.deleteNote(note._id)} />
                                         </div>
                                     </div>
                                 </div>
