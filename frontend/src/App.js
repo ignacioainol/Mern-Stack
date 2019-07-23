@@ -19,6 +19,10 @@ function App() {
       <Route path="/create" component={CreateNote}/>
       <Route path="/user" component={CreateUser}/>
     </div>
+
+
+    <script src="https://use.fontawesome.com/6e2ac6f992.js"></script>
+
   </Router>
   );
 }

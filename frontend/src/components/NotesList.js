@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 //import {format} from 'timeago.js';
 import moment from 'moment';
+import { FaBeer, FaTimesCircle } from 'react-icons/fa';
 import 'moment/locale/es';  // without this line it didn't work
 moment.locale('es');
 
@@ -28,7 +29,14 @@ export default class NotesList extends Component {
                         <div className="col-md-4 p-2" key={note._id}>
                             <div className="card">
                                 <div className="card-header">
-                                    <h4>{note.title}</h4>
+                                    <div className="row">
+                                        <div className="col-md-10">
+                                            <h4>{note.title}</h4>
+                                        </div>
+                                        <div className="col-md-2">
+                                            <FaTimesCircle className="deleteNote" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="card-body">
                                     <p>{note.content}</p>
