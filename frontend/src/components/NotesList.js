@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios';
 //import {format} from 'timeago.js';
 import moment from 'moment';
-import { FaBeer, FaTimesCircle } from 'react-icons/fa';
+import { Link, Redirect } from 'react-router-dom';
+import { FaEdit, FaTimesCircle } from 'react-icons/fa';
 import 'moment/locale/es';  // without this line it didn't work
 moment.locale('es');
 
@@ -14,7 +15,7 @@ export default class NotesList extends Component {
         notes: []
     }
 
-    componentDidMount = async () => {
+    componentDidMount = () => {
         this.getNotes();
     }
 
@@ -37,10 +38,13 @@ export default class NotesList extends Component {
                             <div className="card">
                                 <div className="card-header">
                                     <div className="row">
-                                        <div className="col-md-10">
+                                        <div className="col-md-9">
                                             <h4>{note.title}</h4>
                                         </div>
-                                        <div className="col-md-2">
+                                        <div className="col-md-3">
+                                            <Link to={'/edit/' + note._id }>
+                                                <FaEdit className="editNote" />
+                                            </Link>
                                             <FaTimesCircle className="deleteNote" onClick={ () => this.deleteNote(note._id)} />
                                         </div>
                                     </div>

@@ -15,3 +15,15 @@ body{
     transform: scale(2.1);
     color: orangered;
 }
+
+.editNote{
+    cursor: pointer;
+    transition: all .5s linear;
+    font-size: 1.5em;
+    margin-right: 5px;
+}
+
+.editNote:hover{
+    transform: rotate(360deg);
+    color:greenyellow;
+}
