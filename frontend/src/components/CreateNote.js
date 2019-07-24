@@ -17,6 +17,12 @@ export default class CreateNote extends Component {
     }
 
     async componentDidMount() {
+        const res = await axios.get('http://localhost:4000/api/users');
+        this.setState({
+            users: res.data.map(user => user.username),
+            userSelected: res.data[0].username
+        });
+
         if(this.props.match.params.id){
             const res = await axios.get('http://localhost:4000/api/notes/' + this.props.match.params.id);
             console.log(res.data);
@@ -27,12 +33,8 @@ export default class CreateNote extends Component {
                 date: new Date(res.data.date),
                 editing: true
             });
-        }
+        }   
 
-        const res = await axios.get('http://localhost:4000/api/users');
-        this.setState({
-            users: res.data.map(user => user.username)
-        });
     }
 
     onSubmit = async (e) => {
@@ -75,8 +77,7 @@ export default class CreateNote extends Component {
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card card-body">
-                    <h4>Create Note</h4>
-                    {this.state.res}
+                    <h4> { (this.state.editing) ? 'Edit Note' : 'Create Note'} </h4>
                     <form onSubmit={this.onSubmit}>
 
                         <div className="form-group">
@@ -122,7 +123,7 @@ export default class CreateNote extends Component {
                                 />
                         </div>
 
-                        <button className="btn btn-primary btn-block">Save Note</button>
+                        <button className="btn btn-primary btn-block">{(this.state.editing) ? 'Edit Note': 'Save Note'}</button>
                     </form>
                 </div>
             </div>
