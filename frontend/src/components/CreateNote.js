@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
+import { Redirect } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default class CreateNote extends Component {
@@ -13,7 +14,7 @@ export default class CreateNote extends Component {
         date: new Date(),
         editing: false,
         _id: '',
-        res: ''
+        redirect: false
     }
 
     async componentDidMount() {
@@ -37,6 +38,12 @@ export default class CreateNote extends Component {
 
     }
 
+    renderRedirect = () => {
+        if (this.state.redirect) {
+          return <Redirect to='/' />
+        }
+    }
+
     onSubmit = async (e) => {
         e.preventDefault();
         if(this.state.editing){
@@ -56,8 +63,9 @@ export default class CreateNote extends Component {
             });
         }
 
-        window.location.href = '/';
-        //alert(this.state.title + " " + this.state.content + " " + this.state.userSelected + " "+ this.state.date);
+        this.setState({
+            redirect: true
+        });
         
     }
 
@@ -126,6 +134,7 @@ export default class CreateNote extends Component {
                         <button className="btn btn-primary btn-block">{(this.state.editing) ? 'Edit Note': 'Save Note'}</button>
                     </form>
                 </div>
+                {this.renderRedirect()}
             </div>
         )
     }

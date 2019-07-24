@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 //import {format} from 'timeago.js';
 import moment from 'moment';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaEdit, FaTimesCircle } from 'react-icons/fa';
 import 'moment/locale/es';  // without this line it didn't work
 moment.locale('es');
